@@ -34,23 +34,23 @@ class ArrayList
   end
 
   def get(index)
-    raise_no_such_element(index) if index > @length - 1
+    raise_no_such_element(index) if index > length - 1
     @content.get(index)
   end
 
   def set(index, element)
-    raise_no_such_element(index) if index > @length - 1
+    raise_no_such_element(index) if index > length - 1
     @content.set(index, element)
     element
   end
 
   def first
-    raise_no_such_element if @length == 0
+    raise_no_such_element if length == 0
     @content.get(0)
   end
 
   def last
-    raise_no_such_element if @length == 0
+    raise_no_such_element if length == 0
     @content.get(@length - 1)
   end
 
@@ -59,11 +59,11 @@ class ArrayList
     if index < @length || index == 0
       @length += 1
       previous_array = @content
-      @content = FixedArray.new(@length)
+      @content = FixedArray.new(length)
       @content.set(index, element)
 
       i = 0
-      while i < @length
+      while i < length
         if i < index
           @content.set(i, previous_array.get(i))
         end
@@ -74,6 +74,17 @@ class ArrayList
       end
     end
     @content
+  end
+
+  def trim(amount)
+    @length = length - amount 
+    new_fixed_array = FixedArray.new(length)
+    i = 0
+    while i < length
+      new_fixed_array.set(i, @content.get(i))
+      i += 1
+    end
+    @content = new_fixed_array
   end
 
   private

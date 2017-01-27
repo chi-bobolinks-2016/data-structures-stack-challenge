@@ -14,12 +14,16 @@ class Stack
   def pop
     last_index = @content.length - 1
     last_element = self.top
-    @content.set(last_index, nil)
+    @content.trim(1)
     last_element
   end
 
   def top
     @content.last
+  end
+
+  def empty?
+    @content.length === 0 ? true : false
   end
 
 end
